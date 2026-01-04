@@ -25,10 +25,10 @@ sleep 5
 
 # 检查状态
 if docker ps | grep -q google-play-scraper; then
-    SERVER_IP=$(curl -s ifconfig.me 2>/dev/null || echo "localhost")
+    LOCAL_IP=$(hostname -I | awk '{print $1}' 2>/dev/null || echo "localhost")
     echo "✅ 部署成功！"
-    echo "📡 访问地址: http://$SERVER_IP:3000"
-    echo "🧪 测试: curl http://$SERVER_IP:3000/app/com.bkash.businessapp"
+    echo "📡 访问地址: http://$LOCAL_IP:3000"
+    echo "🧪 测试: curl http://$LOCAL_IP:3000/app/com.bkash.businessapp"
 else
     echo "❌ 部署失败，查看日志:"
     docker logs google-play-scraper
